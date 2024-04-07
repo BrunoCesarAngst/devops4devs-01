@@ -8,8 +8,20 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4.1.2
+        name: Checkout do repositório
+      - name: Autenticando no Docker
+        with:
+          username: ${( secrets.DOCKERHUB_USER )}
+          password: ${( secrets.DOCKERHUB_PWD )}
       - name: "Construção da imagem Docher"
-        run: echo "Docker Build"
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: true
+          tag: |
+            brunoangst/newskube:latest
+            brunoangst/newskube:${(github.run_number)}            
       - name: "Publicar a imagem no Docher Hub"
         run: echo "Docker push"
   CD:
