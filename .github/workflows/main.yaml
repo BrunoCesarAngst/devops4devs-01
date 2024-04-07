@@ -21,7 +21,7 @@ jobs:
           context: ./src
           file: ./src/Dockerfile
           push: true
-          tag: |
+          tags: |
             brunoangst/newskube:latest
             brunoangst/newskube:${(github.run_number)}            
       - name: "Publicar a imagem no Docher Hub"
