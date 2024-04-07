@@ -30,6 +30,8 @@ jobs:
     needs: [CI]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4.1.2
       - name: Configuração do ambuente AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -37,6 +39,11 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: Configuração do Kubeconfig
-        run: ls -a
-      - name: "Executar o deploy"
-        run: echo "Kubectl apply"
+        run: aws eks update-kubeconfig --name devops4devs-eks-mbcangst --region us-east-1
+      - name: Executar o deploy
+        uses: Azure/k8s-deploy@v4.9
+        with:
+          manifests: |
+            ./k8s/deploy.yaml
+          images: |
+            brunoangst/newskube:${{ github.run_number }}
