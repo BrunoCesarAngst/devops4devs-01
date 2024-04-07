@@ -25,8 +25,7 @@ jobs:
             brunoangst/newskube:latest
             brunoangst/newskube:${(github.run_number)}            
       - name: "Publicar a imagem no Docher Hub"
-        run: echo "Docker push"
-        
+        run: echo "Docker push"        
   CD:
     needs: [CI]
     runs-on: ubuntu-latest
