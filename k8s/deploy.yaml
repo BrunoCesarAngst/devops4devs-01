@@ -85,9 +85,9 @@ spec:
           - name: DB_HOST
             value: postgres
           - name: AWS_ACCESS_KEY
-            value: ${( secrets.AWS_ACCESS_KEY_ID })
+            value: {{ AWS_ACCESS_KEY_ID }}
           - name: AWS_ACCESS_SECRET
-            value: ${( secrets.AWS_SECRET_ACCESS_KEY })
+            value: {{ AWS_SECRET_ACCESS_KEY }}
           - name: AWS_S3_BUCKET_NAME
             value: devops4devs-filesmbcangst
           - name: STORAGE_TYPE
